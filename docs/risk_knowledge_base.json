@@ -1,0 +1,92 @@
+[
+  {
+    "package_name": "com.google.android.apps.authenticator2",
+    "app_name": "Google Authenticator",
+    "risk_level": "CRITICAL",
+    "data_type": "TOTP (Time-based One-time Password) seed credentials",
+    "backup_strategy": "Manual in-app export to a consolidation QR code (Transfer QR Code). Hardware-backed keys are non-extractable via ADB.",
+    "recovery_requirements": "Scan the generated Transfer QR code using the camera from the Google Authenticator app on the target device.",
+    "user_warnings": "Wiping your device without exporting your Google Authenticator accounts will result in permanent lockout from all accounts protected by its 2FA codes."
+  },
+  {
+    "package_name": "com.azure.authenticator",
+    "app_name": "Microsoft Authenticator",
+    "risk_level": "CRITICAL",
+    "data_type": "MFA tokens, Azure Active Directory keys, password autofill, cloud-synced TOTP records",
+    "backup_strategy": "Enable Cloud Backup inside the app settings to save encrypted credentials to a personal Microsoft Account.",
+    "recovery_requirements": "Install the app on the target device and authenticate with the identical Microsoft account to trigger database restore.",
+    "user_warnings": "Verify that 'Cloud Backup' is active and showing a green status indicator before wiping. iOS and Android backups are mutually incompatible."
+  },
+  {
+    "package_name": "org.thoughtcrime.securesms",
+    "app_name": "Signal",
+    "risk_level": "CRITICAL",
+    "data_type": "SQLCipher-encrypted chat database, local cryptographic keys, local media attachments",
+    "backup_strategy": "Enable local backups in-app to generate an encrypted backup file. Copy the backup file from '/sdcard/Signal/Backups/' to the host PC.",
+    "recovery_requirements": "Transfer the backup file back to the target device, enter the 30-digit passphrase generated when turning on backups during initial setup.",
+    "user_warnings": "Signal stores zero chat history on its servers. Wiping the device without saving BOTH the backup file and the 30-digit passphrase will permanently delete your chats."
+  },
+  {
+    "package_name": "com.whatsapp",
+    "app_name": "WhatsApp",
+    "risk_level": "CRITICAL",
+    "data_type": "Encrypted chat databases, local media directories (documents, images, voice notes)",
+    "backup_strategy": "Run an in-app backup to Google Drive or copy the directory '/sdcard/Android/media/com.whatsapp/' to the host PC via ADB.",
+    "recovery_requirements": "Re-verify the telephone number on the target device via SMS OTP, then select 'Restore' from Google Drive or local storage media.",
+    "user_warnings": "Local database files require the original decryption key stored inside WhatsApp's private sandbox. If you do not have Google Drive sync enabled, you must copy the media folders and register with the same phone number to decrypt files."
+  },
+  {
+    "package_name": "org.telegram.messenger",
+    "app_name": "Telegram",
+    "risk_level": "MEDIUM",
+    "data_type": "Server-synced chat history, cached media, local-only Secret Chats",
+    "backup_strategy": "Cloud chats are stored on Telegram servers and do not need local backup. Secret Chats are stored in the private sandbox and cannot be backed up.",
+    "recovery_requirements": "Sign in on the new device, complete SMS OTP verification, and enter the password if 2-Step Verification is active.",
+    "user_warnings": "All active 'Secret Chats' will be destroyed when the old device is reset. Normal chats, groups, and channels will sync automatically upon logging in."
+  },
+  {
+    "package_name": "com.chase.sig.android",
+    "app_name": "Chase Mobile (Banking)",
+    "risk_level": "HIGH",
+    "data_type": "Session tokens, registered device identifiers, cached statements",
+    "backup_strategy": "None. Banking apps enforce strict security bindings to the hardware. App databases cannot be backed up or transferred.",
+    "recovery_requirements": "Log in with online banking credentials (username and password) on the target device, and complete identity verification (SMS/Email OTP).",
+    "user_warnings": "Wiping your device will revoke its authorization as a trusted login device. Ensure you know your online banking username, password, and security answers beforehand."
+  },
+  {
+    "package_name": "co.bitwarden.app",
+    "app_name": "Bitwarden (Password Manager)",
+    "risk_level": "HIGH",
+    "data_type": "Offline encrypted credential database, secure notes, Master Password configurations",
+    "backup_strategy": "Synchronize the local vault with the Bitwarden cloud server before wiping, or export a password-protected JSON vault backup file.",
+    "recovery_requirements": "Install the app on the new device, log in using the Master Password, and verify authorization via your designated 2FA channel.",
+    "user_warnings": "Make sure you know your Bitwarden Master Password. If your vault is locked and you forget the Master Password, there is no recovery option."
+  },
+  {
+    "package_name": "com.google.android.apps.photos",
+    "app_name": "Google Photos (Gallery)",
+    "risk_level": "MEDIUM",
+    "data_type": "Local photos, video recordings, metadata",
+    "backup_strategy": "Verify that 'Backup & Sync' status is shown as 'Backup complete' in the app, or copy '/sdcard/DCIM/' and '/sdcard/Pictures/' to the host PC.",
+    "recovery_requirements": "Sign into the identical Google account on the target device to sync files, or copy the media directory back via USB.",
+    "user_warnings": "Photos that are not fully synced to the cloud or copied to a PC will be permanently deleted during a factory reset."
+  },
+  {
+    "package_name": "md.obsidian",
+    "app_name": "Obsidian (Notes)",
+    "risk_level": "HIGH",
+    "data_type": "Markdown files, plugin configurations, local workspace setups",
+    "backup_strategy": "Copy your vault directories (typically located in '/sdcard/Documents/' or '/sdcard/Obsidian/') to the host PC via ADB/USB.",
+    "recovery_requirements": "Install Obsidian on the new device, create a vault directory, and copy your backup files into it.",
+    "user_warnings": "Obsidian does not sync notes to a free cloud service. Notes must be manually backed up over USB to prevent loss."
+  },
+  {
+    "package_name": "com.google.android.keep",
+    "app_name": "Google Keep (Notes)",
+    "risk_level": "LOW",
+    "data_type": "Notes, checklists, drawings, voice recordings",
+    "backup_strategy": "Automatically synchronized in real-time to the user's Google account cloud backend.",
+    "recovery_requirements": "Log in to the Google account on the target device to trigger automatic sync.",
+    "user_warnings": "Ensure that sync for 'Google Keep' is active under Settings -> Accounts -> Google Account Sync."
+  }
+]

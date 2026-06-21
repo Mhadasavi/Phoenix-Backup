@@ -1,0 +1,274 @@
+[
+  {
+    "package_pattern": "com.google.android.apps.authenticator2",
+    "app_name": "Google Authenticator",
+    "category": "AUTHENTICATOR",
+    "severity": "CRITICAL",
+    "reasoning": "TOTP credentials are bound to local device hardware keys in the Android Keystore enclave and cannot be extracted via ADB.",
+    "remediation": "Open Authenticator -> Settings -> Transfer accounts -> Export accounts. Save the displayed QR code."
+  },
+  {
+    "package_pattern": "com.microsoft.authenticator",
+    "app_name": "Microsoft Authenticator",
+    "category": "AUTHENTICATOR",
+    "severity": "CRITICAL",
+    "reasoning": "Azure AD keys and TOTP seeds are locked inside the device hardware sandbox.",
+    "remediation": "Open Authenticator -> Settings -> Turn on Cloud Backup. Log in to your Microsoft Account."
+  },
+  {
+    "package_pattern": "com.azure.authenticator",
+    "app_name": "Microsoft Authenticator",
+    "category": "AUTHENTICATOR",
+    "severity": "CRITICAL",
+    "reasoning": "Azure AD keys and TOTP seeds are locked inside the device hardware sandbox.",
+    "remediation": "Open Authenticator -> Settings -> Turn on Cloud Backup. Log in to your Microsoft Account."
+  },
+  {
+    "package_pattern": "com.beemdevelopment.aegis",
+    "app_name": "Aegis Authenticator",
+    "category": "AUTHENTICATOR",
+    "severity": "HIGH",
+    "reasoning": "Aegis vault is encrypted locally. Standard ADB backups are disabled.",
+    "remediation": "Open Aegis -> Settings -> Export -> Save password-encrypted vault to local storage and copy it to your PC."
+  },
+  {
+    "package_pattern": "com.chase.sig.android",
+    "app_name": "Chase Mobile",
+    "category": "BANKING",
+    "severity": "HIGH",
+    "reasoning": "Chase Mobile enforces hardware device bindings. Migration will require fresh verification on the new target device.",
+    "remediation": "Confirm your username, password, and security answers. Ensure you can receive verification SMS on the new phone."
+  },
+  {
+    "package_pattern": "com.infonow.bofamobile",
+    "app_name": "Bank of America",
+    "category": "BANKING",
+    "severity": "HIGH",
+    "reasoning": "Banking profiles use cryptographic hardware bindings and prevent backup transmission.",
+    "remediation": "Verify login password beforehand. Be prepared to complete SMS/Phone OTP verification on the new device."
+  },
+  {
+    "package_pattern": "com.icicibank.imobile",
+    "app_name": "ICICI iMobile",
+    "category": "BANKING",
+    "severity": "HIGH",
+    "reasoning": "iMobile binds access strictly to the physical SIM card serial and device identity.",
+    "remediation": "Ensure the registered SIM card is inserted into the target device before starting the iMobile activation."
+  },
+  {
+    "package_pattern": "com.google.android.apps.nbu.paisa.user",
+    "app_name": "Google Pay",
+    "category": "UPI",
+    "severity": "HIGH",
+    "reasoning": "UPI configurations link accounts to SIM cards and secure enclaves.",
+    "remediation": "Install Google Pay on a device containing the registered SIM card. Re-run SMS verification on sign-in."
+  },
+  {
+    "package_pattern": "com.phonepe.app",
+    "app_name": "PhonePe",
+    "category": "UPI",
+    "severity": "HIGH",
+    "reasoning": "PhonePe UPI credentials require direct verification against the registered SIM slot identity.",
+    "remediation": "Sign in on the new device with the registered SIM card active and complete SMS verification."
+  },
+  {
+    "package_pattern": "net.one97.paytm",
+    "app_name": "Paytm",
+    "category": "UPI",
+    "severity": "HIGH",
+    "reasoning": "UPI bindings and local logs cannot be moved. Wallet balances are server-managed.",
+    "remediation": "Install Paytm, sign in with SMS verification, and enter UPI transaction codes."
+  },
+  {
+    "package_pattern": "org.thoughtcrime.securesms",
+    "app_name": "Signal",
+    "category": "SECURE_MESSENGER",
+    "severity": "CRITICAL",
+    "reasoning": "Signal databases use local SQLCipher encryption, and Signal explicitly disables standard Android backup capabilities.",
+    "remediation": "Open Signal -> Profile -> Chats -> Chat backups -> Turn on. Write down the 30-digit passphrase and copy the backup file from /sdcard/Signal/Backups/ to your PC."
+  },
+  {
+    "package_pattern": "com.whatsapp",
+    "app_name": "WhatsApp",
+    "category": "SECURE_MESSENGER",
+    "severity": "CRITICAL",
+    "reasoning": "WhatsApp disables standard ADB backup. Database decryption keys reside in root-protected private sandboxes.",
+    "remediation": "Open WhatsApp -> Settings -> Chats -> Chat backup -> Tap Backup to Google Drive. Or copy the media folder /sdcard/Android/media/com.whatsapp/ to your PC."
+  },
+  {
+    "package_pattern": "org.telegram.messenger",
+    "app_name": "Telegram",
+    "category": "SECURE_MESSENGER",
+    "severity": "MEDIUM",
+    "reasoning": "Telegram cloud chats sync automatically. Local-only Secret Chats cannot be backed up and will be lost.",
+    "remediation": "Secret Chats cannot be restored. Standard cloud chats will sync automatically once verified via SMS on the new device."
+  },
+  {
+    "package_pattern": "com.facebook.katana",
+    "app_name": "Facebook",
+    "category": "SOCIAL_MEDIA",
+    "severity": "MEDIUM",
+    "reasoning": "Profile feed data is cloud-backed. Direct login state must be authenticated.",
+    "remediation": "Verify that your account credentials and 2FA settings are active on another device."
+  },
+  {
+    "package_pattern": "com.instagram.android",
+    "app_name": "Instagram",
+    "category": "SOCIAL_MEDIA",
+    "severity": "MEDIUM",
+    "reasoning": "Instagram accounts sync to servers. Offline draft stories and posts are lost on reset.",
+    "remediation": "Publish or delete pending media drafts before wiping your old device."
+  },
+  {
+    "package_pattern": "com.twitter.android",
+    "app_name": "Twitter / X",
+    "category": "SOCIAL_MEDIA",
+    "severity": "MEDIUM",
+    "reasoning": "Unpublished tweets and message drafts reside only on local sandboxes.",
+    "remediation": "Publish or save twitter draft notes before wiping the device."
+  },
+  {
+    "package_pattern": "com.google.android.gm",
+    "app_name": "Gmail",
+    "category": "EMAIL",
+    "severity": "LOW",
+    "reasoning": "Email databases reside on Google Cloud servers and sync automatically.",
+    "remediation": "Ensure Google Account Sync is active inside Android Account Settings."
+  },
+  {
+    "package_pattern": "com.microsoft.office.outlook",
+    "app_name": "Outlook",
+    "category": "EMAIL",
+    "severity": "LOW",
+    "reasoning": "Mailbox accounts and calendars are server-managed.",
+    "remediation": "Re-add email addresses and credentials manually in the new Outlook app."
+  },
+  {
+    "package_pattern": "co.bitwarden.app",
+    "app_name": "Bitwarden",
+    "category": "PASSWORD_MANAGER",
+    "severity": "HIGH",
+    "reasoning": "Local vault caches are encrypted. Forgetting Master Passwords or losing offline entries will cause lockout.",
+    "remediation": "Verify that your local vault is synchronized with the Bitwarden cloud server before wiping. Know your Master Password."
+  },
+  {
+    "package_pattern": "com.onepassword.android",
+    "app_name": "1Password",
+    "category": "PASSWORD_MANAGER",
+    "severity": "HIGH",
+    "reasoning": "Master key vaults sync to the cloud. Secret keys are required for sign-ins.",
+    "remediation": "Locate your 1Password Emergency Kit containing your Secret Key before performing resets."
+  },
+  {
+    "package_pattern": "net.nuttycreative.keepassdx",
+    "app_name": "KeePassDX",
+    "category": "PASSWORD_MANAGER",
+    "severity": "MEDIUM",
+    "reasoning": "KeePassDX stores vaults entirely locally in a .kdbx file.",
+    "remediation": "Copy your password vault .kdbx file off the phone onto your PC via USB before resetting."
+  },
+  {
+    "package_pattern": "com.google.android.apps.docs",
+    "app_name": "Google Drive",
+    "category": "CLOUD_STORAGE",
+    "severity": "LOW",
+    "reasoning": "All files sync to the Google Drive cloud workspace.",
+    "remediation": "Ensure any files checked as 'available offline' have finished syncing changes."
+  },
+  {
+    "package_pattern": "com.dropbox.android",
+    "app_name": "Dropbox",
+    "category": "CLOUD_STORAGE",
+    "severity": "LOW",
+    "reasoning": "Files reside on cloud servers. Cache is rebuilt on login.",
+    "remediation": "Check for any active uploading indicators in the status panel before resetting."
+  },
+  {
+    "package_pattern": "com.microsoft.skydrive",
+    "app_name": "OneDrive",
+    "category": "CLOUD_STORAGE",
+    "severity": "LOW",
+    "reasoning": "Storage is server-managed and matches corporate directories.",
+    "remediation": "Log in using credentials to re-sync folders on the new device."
+  },
+  {
+    "package_pattern": "md.obsidian",
+    "app_name": "Obsidian",
+    "category": "NOTE_TAKING",
+    "severity": "HIGH",
+    "reasoning": "Obsidian stores notes as raw local files on the device filesystem. Obsidian does not sync notes automatically to the cloud for free.",
+    "remediation": "Connect your phone to your PC and manually copy your notes vault folder (typically under /sdcard/Documents/Obsidian/) to your computer."
+  },
+  {
+    "package_pattern": "com.google.android.keep",
+    "app_name": "Google Keep",
+    "category": "NOTE_TAKING",
+    "severity": "LOW",
+    "reasoning": "Notes and checklists sync automatically in real-time to Google servers.",
+    "remediation": "Verify Google Keep Sync is enabled under Google Settings -> Sync options."
+  },
+  {
+    "package_pattern": "com.microsoft.office.onenote",
+    "app_name": "OneNote",
+    "category": "NOTE_TAKING",
+    "severity": "LOW",
+    "reasoning": "Notebooks sync to OneDrive storage accounts.",
+    "remediation": "Ensure notebooks show a fully synchronized state in the OneNote menu."
+  },
+  {
+    "package_pattern": "com.google.android.apps.photos",
+    "app_name": "Google Photos",
+    "category": "GALLERY",
+    "severity": "MEDIUM",
+    "reasoning": "Unsynced local media will be wiped. Cloud backups are standard.",
+    "remediation": "Confirm in-app status reads 'Backup complete' or copy '/sdcard/DCIM/' to a PC."
+  },
+  {
+    "package_pattern": "com.simplemobiletools.gallery",
+    "app_name": "Simple Gallery",
+    "category": "GALLERY",
+    "severity": "LOW",
+    "reasoning": "No cloud backup agent exists in this application.",
+    "remediation": "Manually copy your media directories (DCIM/Pictures) to your computer."
+  },
+  {
+    "package_pattern": "com.expressvpn.vpn",
+    "app_name": "ExpressVPN",
+    "category": "VPN",
+    "severity": "LOW",
+    "reasoning": "VPN profile settings sync from servers.",
+    "remediation": "Retrieve your ExpressVPN login details or activation key before device wipe."
+  },
+  {
+    "package_pattern": "com.nordvpn.android",
+    "app_name": "NordVPN",
+    "category": "VPN",
+    "severity": "LOW",
+    "reasoning": "Profiles and server lists are cloud-backed.",
+    "remediation": "Install the app and log in on the target device."
+  },
+  {
+    "package_pattern": "com.trello",
+    "app_name": "Trello",
+    "category": "PRODUCTIVITY",
+    "severity": "LOW",
+    "reasoning": "Boards and task lists are hosted on Trello cloud systems.",
+    "remediation": "Sign in on the new device to automatically restore access."
+  },
+  {
+    "package_pattern": "com.slack",
+    "app_name": "Slack",
+    "category": "PRODUCTIVITY",
+    "severity": "LOW",
+    "reasoning": "Workspace conversations reside on Slack cloud systems.",
+    "remediation": "Know workspace URLs and login details before resetting."
+  },
+  {
+    "package_pattern": "com.microsoft.teams",
+    "app_name": "Teams",
+    "category": "PRODUCTIVITY",
+    "severity": "LOW",
+    "reasoning": "Corporate channels are hosted on Microsoft 365 servers.",
+    "remediation": "Log in with enterprise credentials. Solve corporate MFA checks on the new device."
+  }
+]

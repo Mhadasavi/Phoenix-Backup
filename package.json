@@ -1,0 +1,24 @@
+{
+  "name": "phoenix-backup-monorepo",
+  "version": "1.0.0",
+  "description": "AI-Powered Android Backup & Recovery Assistant Monorepo Workspace",
+  "private": true,
+  "workspaces": [
+    "desktop",
+    "shared"
+  ],
+  "scripts": {
+    "bootstrap": "npm install --ignore-scripts",
+    "dev:desktop": "npm run dev --workspace=desktop",
+    "build:desktop": "npm run build --workspace=desktop",
+    "test:desktop": "npm run test --workspace=desktop",
+    "test:mocks:adb": "python tests/mocks/mock_device.py",
+    "lint": "eslint \"**/*.{ts,tsx}\"",
+    "format": "prettier --write \"**/*.{ts,tsx,json,css,md}\""
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.5"
+  }
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phoenix Backup - Pre-Flight Migration Diagnostic Tool</title>
+  <style>
+    /* Base dark themed variables */
+    :root {
+      --bg-color: #0d1117;
+      --text-color: #c9d1d9;
+    }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <!-- React app renders here -->
+    <div style="padding: 20px;">Loading Phoenix Backup System Core...</div>
+  </div>
+  <!-- Webpack bundles the JS and injects it here -->
+  <script src="../../dist/renderer/renderer.bundle.js"></script>
+</body>
+</html>
